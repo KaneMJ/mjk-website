@@ -7,13 +7,16 @@ const Navbar = (props) => {
       <div className='ui inverted secondary pointing menu'>
         <NavLink exact to='/' className='item' >
           Home
-      </NavLink>
+        </NavLink>
+        <NavLink exact to='/chat' className='item' >
+          Chat
+        </NavLink>
         <NavLink to='/about' className='item'>
           About
-      </NavLink>
+        </NavLink>
         <NavLink to='/contact' className='item'>
           Contact
-      </NavLink>
+        </NavLink>
       </div>
     </div>
   )
