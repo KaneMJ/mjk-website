@@ -30,7 +30,7 @@ class Login extends Component {
                   name="username"
                 />
               </div>
-              <div className="field">
+              <div class="field">
                 <label>Password</label>
                 <input
                   value={this.state.password}
@@ -40,7 +40,7 @@ class Login extends Component {
                 />
               </div>
             </div>
-            <div className="ui submit black button" style={{marginTop: '20px'}}>Submit</div>
+            <div class="ui submit black button" style={{marginTop: '20px'}}>Submit</div>
             </div>
           </div>
         </div>
