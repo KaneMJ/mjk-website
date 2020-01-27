@@ -1,7 +1,11 @@
 import React from 'react'
-import { NavLink, withRouter } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
+import { connect } from 'react-redux'
+import ACTIONS from './Login/loginActions'
 
 const Navbar = (props) => {
+
+  console.log("Right now this is what we have in props", props.user);
   return (
     <div className='ui inverted segment'>
       <div className='ui inverted secondary pointing menu'>
@@ -17,9 +21,26 @@ const Navbar = (props) => {
         <NavLink to='/contact' className='item'>
           Contact
         </NavLink>
+        {props.user && (
+        <div className='right menu'>
+        <a className='item'>{props.user}</a>
+        </div>
+        )}
       </div>
     </div>
   )
 }
 
-export default withRouter(Navbar);
+const mapStateToProps = state => ({
+  user: state.user,
+});
+
+const mapDispatchToProps = dispatch => ({
+  loginUser: item => dispatch(ACTIONS.logUserIn(item)),
+  logoutUser: id => dispatch(ACTIONS.logOutUser(id))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Navbar);
