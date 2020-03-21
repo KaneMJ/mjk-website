@@ -5,7 +5,7 @@ import ACTIONS from './Login/loginActions'
 
 const Navbar = (props) => {
 
-  console.log("NavBar Props =>", props.user);
+  console.log("NavBar Making Changes Props =>", props.user);
   return (
     <div className='ui inverted basic segment'>
       <div className='ui inverted secondary pointing menu'>
