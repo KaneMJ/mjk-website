@@ -1,9 +1,12 @@
 import React, { Component } from "react";
+import ACTIONS from './loginActions'
+import { connect } from "react-redux";
 
 class Login extends Component {
   state = {
     username: "",
-    password: ""
+    password: "",
+    usernameValid: '',
   };
 
   handleChange = e => {
@@ -11,9 +14,24 @@ class Login extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  handleSubmit = () => {
+    console.log("You clicked the submit button");
+    if(this.state.username.length > 6){
+      this.props.loginUser(this.state.username);
+      this.props.history.push("/")
+    } else {
+      this.setState({ usernameValid: 'Username must be greater than 6 characters'})
+    }
+  }
+
   render() {
+    const { usernameValid } = this.state;
+
+    console.log("Right now we have this", this.props.user);
+
     return (
       <div className="ui fluid container">
+        <h1>Hello - {this.props.user}</h1>
         <div
           className="ui one column stackable centered page grid"
           style={{ marginTop: "35vh" }}
@@ -21,7 +39,7 @@ class Login extends Component {
           <div className="column" style={{ maxWidth: 600 }}>
             <div className='ui padded segment'>
             <div className="ui form">
-              <div className="field">
+              <div className={usernameValid ? 'field error' : 'field'}>
                 <label>Username</label>
                 <input
                   value={this.state.username}
@@ -30,7 +48,7 @@ class Login extends Component {
                   name="username"
                 />
               </div>
-              <div class="field">
+              <div className="field">
                 <label>Password</label>
                 <input
                   value={this.state.password}
@@ -40,7 +58,7 @@ class Login extends Component {
                 />
               </div>
             </div>
-            <div class="ui submit black button" style={{marginTop: '20px'}}>Submit</div>
+            <div className="ui submit black button" style={{marginTop: '20px'}} onClick={this.handleSubmit}>Submit</div>
             </div>
           </div>
         </div>
@@ -49,4 +67,16 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapStateToProps = state => ({
+  user: state.user,
+});
+
+const mapDispatchToProps = dispatch => ({
+  loginUser: item => dispatch(ACTIONS.logUserIn(item)),
+  logoutUser: id => dispatch(ACTIONS.logOutUser(id))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login);
