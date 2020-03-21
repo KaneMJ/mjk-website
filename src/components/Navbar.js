@@ -7,7 +7,7 @@ const Navbar = (props) => {
 
   console.log("NavBar Props =>", props.user);
   return (
-    <div className='ui inverted segment'>
+    <div className='ui inverted basic segment'>
       <div className='ui inverted secondary pointing menu'>
         <NavLink exact to='/' className='item' >
           Home
